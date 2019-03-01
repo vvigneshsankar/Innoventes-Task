@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet"  type="text/css" href="css/home.css?version=51">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript">
+$(document).ready(function(){
+	   $('#rplus').click(function(){
+   			room=0;
+        	var room= parseInt($('#room').val());
+        	var adult=parseInt($('#adult').val());
+       			if(room<5){
+	    			$('#room').val(room + 1);
+        			$('#adult').val(adult+1);
+         		}
+        });
+		$('#rminus').click(function(){
+        	var room= parseInt($('#room').val());
+        	var adult=parseInt($('#adult').val());
+        	var child=parseInt($('#child').val());
+      		var roomcapacity=room*4;
+      		var people=adult+child;
+      			if(room==1)
+      			{
+      				$('rminus').prop('disable','true');
+      			}
+      			else if((roomcapacity>=people)&&(child>0)&&(room>0)){
+					$('#room').val(room-1);
+            		var roomcount=parseInt($('#room').val());
+          			$('#adult').val(roomcount*4);
+          	 		$('#child').val(0);
+            		}
+				else if((roomcapacity>=people)&&(room>0)){
+					$('#room').val(room-1);
+            		var roomcount=parseInt($('#room').val());
+            		$('#adult').val(roomcount*4);
+         			}
+
+
+		});
+       $('#aplus').click(function(){
+       		var room=parseInt($('#room').val());
+      		var adult=parseInt($('#adult').val());
+      		var children=parseInt($('#child').val());
+      		var roomcapacity=room*4;
+      		var people=adult+children;
+      			if(people>=roomcapacity)
+      			{
+      			 $('#room').val(room+1);
+      		     $('#adult').val(adult+1);
+      			}
+      			else
+      			{
+            	$('#adult').val(adult+1);
+        		}
+        });
+       	$('#aminus').click(function(){
+       		var adult = parseInt($('#adult').val());
+         	var room = parseInt($('#room').val());
+         	var child=parseInt($('child').val());
+         	var people=adult+child;
+         	var roomcapacity=room*4;
+         	if((adult!=1)&&(room>=1))
+         	{
+ 				$('#adult').val(adult-1);
+ 				var ad=parseInt($('#adult').val());
+ 				if((ad%4==0)||(roomcapacity>people))
+ 				{
+ 				$('#room').val(room-1);
+ 				}
+ 			}
+      	});
+        $('#cplus').click(function(){
+       		var room=parseInt($('#room').val());
+        	var adult = parseInt($('#adult').val());
+        	var child=parseInt($('#child').val());
+    		var roomcapacity=room*4;
+    		var people=adult+child;
+    		 if((people>=roomcapacity)&&(adult>=1))
+         	 {
+          	 $('#room').val(room+1);
+          	 $('#child').val(child+1);
+         	 }
+        	 else if((room>=1)&&(adult>=1))
+    		 {
+    		 $('#child').val(child+1);
+             }  
+        });
+         $('#cminus').click(function(){
+       		var room=parseInt($('#room').val());
+        	var adult = parseInt($('#adult').val());
+        	var child=parseInt($('#child').val());
+    		var roomcapacity=room*4;
+    		var people=adult+child;
+    		if(child>=1)
+    		{
+    		$('#child').val(child-1);
+        	}  
+		});
+
+  });
+</script>
+</head>
+<body>
+<div class="col-md-8 offset-md-1">
+<p class="clr ftsize"><span class="fa fa-group"></span>&nbsp;&nbsp;Choose number of <b>people</b></p>
+</div>
+<div class="col-md-8 offset-md-1 content">
+<div class="row">
+<div class="room col-md-9">
+<p class="clr ctsize"><span class="fa fa-bed"></span> ROOMS</p>
+</div>
+<div class="col-md-3">
+<button class="fa fa-minus-circle" id="rminus" ></button>
+ <input type="number" class="count" id="room" value="0" min="1" max="5" readonly>
+<button class="fa fa-plus-circle" id="rplus"></button>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="adults col-md-9">
+<p class="clr ctsize"><span class="fa fa-male"></span> ADULTS</p>
+</div>
+<div class="col-md-3">
+<button class="fa fa-minus-circle" id="aminus"></button>
+ <input type="number" class="count" id="adult" value="0" readonly>
+<button class="fa fa-plus-circle" id="aplus"></button>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="adults col-md-9">
+<p class="clr ctsize"><span class="fa fa-child"></span> CHILDREN</p>
+</div>
+<div class="col-md-3">
+<button class="fa fa-minus-circle" id="cminus"></button>
+ <input type="number" class="count" id="child" value="0" readonly>
+<button class="fa fa-plus-circle" id="cplus"></button>
+</div>
+</div>
+</div>
+</body>
+</html>
